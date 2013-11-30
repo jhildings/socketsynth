@@ -5,16 +5,23 @@ var app = require('http').createServer(handler)
 app.listen(3000);
 
 function handler (req, res) {
-  fs.readFile(__dirname + '/index.html',
-  function (err, data) {
-    if (err) {
-      res.writeHead(500);
-      return res.end('Error loading index.html');
-    }
+  
+  var file = __dirname + '/index.html'
+  if(req.url != '/') {
+    file = __dirname + req.url;
+  } 
+  console.log(req.url);
+  console.log(file);
 
-    res.writeHead(200);
-    res.end(data);
-  });
+  fs.readFile(file,
+    function (err, data) {
+      if (err) {
+        res.writeHead(500);
+        return res.end('Error loading index.html');
+      }
+      res.writeHead(200);
+      res.end(data);
+    });
 }
 
 io.sockets.on('connection', function (socket) {

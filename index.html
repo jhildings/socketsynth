@@ -22,7 +22,7 @@ function plays(fq) {
 <script src="functions.js"></script>
 <script>
     $(document).ready(function() {
-    var socket = io.connect('http://1.3.3.10:3000');
+    var socket = io.connect('http://localhost:3000');
 
     $('#sender').live('click',function() {
             var user_message = $('#message_box').val()
