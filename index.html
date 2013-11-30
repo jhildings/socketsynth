@@ -1,4 +1,4 @@
-<script src="jquery-2.0.3.min.js"></script>
+<script src="jquery-1.10.2.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>    
 <script src="mousetrap.min.js"></script>
 <script>                                       
@@ -21,18 +21,18 @@ function plays(fq) {
 </script>
 <script src="functions.js"></script>
 <script>
-    $(document).ready(function() {
-    var socket = io.connect('http://localhost:3000');
+  $(document).ready(function() {
+    var socket = io.connect('http://1.3.3.7:3000');
 
-    $('#sender').live('click',function() {
-            var user_message = $('#message_box').val()
+    $('#sender').on('click',function() {
+            var user_message = $('#message_box').val();
            // socket.emit('send_message',{message: user_message});
             freq = user_message;
             socket.emit('send_message',{frequency:  freq});
-    });
+        });
 
 
-        $('.kb').live('click',function(e) {
+        $('.kb').on('click',function(e) {
             var user_message = this.id;
           //  alert(this.id);
             console.log(this.id+ "aa")
@@ -44,24 +44,30 @@ function plays(fq) {
 
     socket.on('get_message', function(data) {
          console.log(data.frequency);
-          plays(data.frequency)
+         var t = context.currentTime;
+         squareVoice.start(t, data.frequency);
+          //plays(data.frequency)
       //  $('#data').append(data.message);
         });
-    });
 
     squareVoice.create(context, 440, 0);
 squareVoice.connect(context.destination);
 var param = {};
-param.noteOn = function(note) {
-  var f = noteToFrequency(note);
-  var t = context.currentTime;
-  console.log("Note: " + note + ". F: " + f + ". Time: " + t);
-  squareVoice.start(t, f);
-}
-param.noteOff = function(note) {
-  console.log("OFF");
-}
-keyboard.create(param);
+  param.noteOn = function(note) {
+    var f = noteToFrequency(note);
+    //var t = context.currentTime;
+    socket.emit('send_message', {frequency:  f});
+    //console.log("Note: " + note + ". F: " + f + ". Time: " + t);
+  
+  }
+  param.noteOff = function(note) {
+    console.log("OFF");
+  }
+  keyboard.create(param);
+
+    
+    });
+
 
 </script>
 <div id='data'></div>
