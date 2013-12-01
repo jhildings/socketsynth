@@ -3,7 +3,7 @@
   "description" : "A collaborative socket.io synth with web audio API",
   "keywords" : ["synth", "web audio api", "music", "editor"],
   "contributors" : [],
-  "dependencies" : [ "express": ">= 0.9.0" ],
+  "dependencies" : [],
   "main" : "app.js",
   "version" : "0.0.1"
 }
