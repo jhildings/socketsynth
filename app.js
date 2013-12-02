@@ -33,7 +33,7 @@ io.sockets.on('connection', function (socket) {
 
 io.sockets.on('connection', function(socket) {
     socket.on('send_message', function(data) {
-    data.message = data.frequency + ' yo<br/>' +(data.frequency);
-    io.sockets.emit('get_message',data);
+      data.message = data.frequency + "|" + data.voice;
+      io.sockets.emit('get_message', data);
     });
 });
