@@ -1,0 +1,9 @@
+{
+  "name" : "synthsocket",
+  "description" : "A collaborative socket.io synth with web audio API",
+  "keywords" : ["synth", "web audio api", "music", "editor"],
+  "contributors" : [],
+  "dependencies" : [],
+  "main" : "app.js",
+  "version" : "0.0.1"
+}
