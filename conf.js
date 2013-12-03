@@ -1,0 +1,4 @@
+//Config file
+
+
+var host = "";
